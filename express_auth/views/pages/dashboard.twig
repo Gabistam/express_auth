@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/main.css"> <!-- Supposant que vous avez un fichier CSS global -->
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur le Dashboard</h1>
+    </header>
+    <nav>
+        <!-- Ajoutez vos liens de navigation ici, par exemple : -->
+        <a href="/profile">Mon profil</a>
+        <a href="/logout">Déconnexion</a>
+    </nav>
+    <main>
+        <section>
+            <h2>Informations générales</h2>
+            <p>Bienvenue, {{ user.username }}!</p>
+            <p>Email : {{ user.email }}</p>
+        </section>
+        <!-- Ajoutez d'autres sections selon vos besoins -->
+    </main>
+    <footer>
+        <p>&copy; 2023 Votre entreprise. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
