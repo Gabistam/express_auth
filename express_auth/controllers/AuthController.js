@@ -21,7 +21,7 @@ exports.postRegister = async (req, res) => {
         res.redirect('/login');
     } catch (error) {
         console.error(error);
-        res.redirect('pages/register');
+        res.redirect('/register');
     }
 };
 
@@ -39,27 +39,34 @@ exports.postLogin = async (req, res) => {
             });
 
             res.cookie('token', token, { 
-                expires: new Date(Date.now() + 30 * 24 * 360000),
-                httpOnly: true
+                expires: new Date(Date.now() + 3600000),
+                httpOnly: true,
+                secure: true
             });
-            res.redirect('pages/dashboard',
-                { user: userResponseParser(user) });
+            res.redirect('/profile');
         } else {
-            res.redirect('pages/login');
+            res.redirect('/login');
         }
     } catch (error) {
         console.error(error);
-        res.redirect('pages/login');
+        res.redirect('/login');
     }
 };
 
 exports.logout = (req, res) => {
     res.clearCookie('token');
-    res.redirect('pages/login');
+    res.redirect('/login');
 };
 
-exports.getDasboard = (req, res) => {
-    res.render('pages/dashboard', { user: userResponseParser(req.user) });
-};
+// exports.getDashboard = async (req, res) => {
+//     const user = await User.findByPk(req.user.userId);
+//     if (user) {
+//         res.render('pages/dashboard', { user: userResponseParser(user) });
+//     } else {
+//         // Handle the case where the user is not found
+//         res.redirect('/login');
+//     }
+// };
+
 
 // Ici, vous pourriez également ajouter des méthodes pour la réinitialisation du mot de passe, la vérification de l'e-mail, etc.

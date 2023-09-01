@@ -12,6 +12,7 @@ router.post('/login', authController.postLogin);
 router.get('/logout', authController.logout);
 
 // Routes liées aux opérations de l'utilisateur (ces routes nécessitent une authentification)
+// router.get('/dashboard', authMiddleware, authController.getDashboard);
 router.get('/profile', authMiddleware, userController.getProfile);
 router.post('/profile/update', authMiddleware, userController.updateProfile);
 router.post('/profile/delete', authMiddleware, userController.deleteAccount);

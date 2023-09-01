@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    <link rel="stylesheet" href="/path-to-your-css-if-any.css">
-</head>
-<body>
-    <header>
-        <h1>Bienvenue sur notre site !</h1>
-    </header>
-    <main>
-        <p>Ceci est la page d'accueil de notre application Express avec Twig.</p>
-    </main>
-    <footer>
-        <p>© 2023 Tous droits réservés.</p>
-    </footer>
-</body>
-</html>
+{% extends "layouts/base.twig" %}
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper">
+
+        <h1>Ceci est la page d'accueil de notre application Express avec Twig.
+        <br>
+        {{user.username}}
+        <br>
+        </h1>
+
+    </div>
+   
+{% endblock %}

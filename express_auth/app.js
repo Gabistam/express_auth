@@ -5,7 +5,9 @@ const session = require('express-session');
 const userRoutes = require('./routes/userRoutes');
 const { initDatabase } = require('./config/database');
 const path = require('path');
+const twig = require('twig');
 require('dotenv').config();
+
 
 // Initialisation de la base de données
 initDatabase();
@@ -44,12 +46,15 @@ app.use((err, req, res, next) => {
 });
 
 // Middleware pour la gestion des fichiers statiques
-app.use('/static', express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 // Configuration du moteur de vue
 app.set('view engine', 'twig');
 app.set('views', __dirname + '/views');
+twig.extendFunction('asset', function(path) {
+    return '/public' + path; // ou toute autre logique que vous souhaitez implémenter
+});
 
 // Routes
 app.use('/', userRoutes);

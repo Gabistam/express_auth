@@ -8,7 +8,7 @@ exports.getProfile = async (req, res) => {
         if (!user) {
             return res.status(404).send('Utilisateur non trouvé.');
         }
-        res.render('profile', { user: userResponseParser(user) });
+        res.render('pages/profile', { user: userResponseParser(user) });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération du profil.');

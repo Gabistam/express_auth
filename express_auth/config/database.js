@@ -25,9 +25,7 @@ const Connection = async () => {
 // Fonction pour synchroniser les modèles avec la base de données
 const syncModels = async () => {
     try {
-        await sequelize.sync({
-            force: true
-        });
+        await sequelize.sync();
         console.log('All models were synchronized successfully.');
     } catch (error) {
         console.error('Unable to synchronize the models:', error);
