@@ -58,15 +58,7 @@ exports.logout = (req, res) => {
     res.redirect('/login');
 };
 
-// exports.getDashboard = async (req, res) => {
-//     const user = await User.findByPk(req.user.userId);
-//     if (user) {
-//         res.render('pages/dashboard', { user: userResponseParser(user) });
-//     } else {
-//         // Handle the case where the user is not found
-//         res.redirect('/login');
-//     }
-// };
+
 
 
 // Ici, vous pourriez également ajouter des méthodes pour la réinitialisation du mot de passe, la vérification de l'e-mail, etc.

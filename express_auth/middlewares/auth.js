@@ -1,3 +1,5 @@
+/////////////// middlewares/auth.js
+
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
@@ -7,16 +9,21 @@ module.exports = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.redirect('/login');
+        return res.redirect('/login'); // Return early
     }
 
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         req.user = verified;
-        next();
     } catch (error) {
         console.error(error);
         res.clearCookie('token');
-        res.redirect('/login');
+        return res.redirect('/login'); // Return early
     }
+
+    if (!req.user) {
+        return res.redirect('/'); // Return early
+    }
+    
+    next();
 };
