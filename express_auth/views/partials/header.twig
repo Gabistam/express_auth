@@ -1,10 +1,8 @@
-<header >
-
-
-
+<header>
   <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
-<a class="navbar-brand" href="/"><img src="{{asset('img/logo-dark1.png')}}" width="50px" alt="" srcset=""> <span class=" fs-6 text-color-primary">WelcomApp</span></a>
+      <a class="navbar-brand" href="/"><img src="/img/logo-dark1.png" width="50px" alt="" srcset="">
+        <span class=" fs-6 text-color-primary">WelcomApp</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,23 +18,39 @@
             </li>
           </ul>
 
-          
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-2">
-            <li class="nav-item">
-              <a class="nav-link text-primary" aria-current="page" href="/register">Inscription</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-primary" aria-current="page" >|</i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-primary" aria-current="page" href="/login">Connexion</i></a>
-            </li>
-          </ul>
+          {% if user %}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-2">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/profile">
+                        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                        <i class="fs-6">{{ user.username }} dashboard</i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" aria-current="page">|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/logout">
+                        <i class="fa-solid fa-right-from-bracket fa-lg" style="color: red">Deconnexion</i>
+                    </a>
+                </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 p-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" aria-current="page" href="/register">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" aria-current="page">|</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" aria-current="page" href="/login">Connexion</a>
+                    </li>
+                </ul>
+            {% endif %}
+
         </div>
       </div>
     </div>
   </nav>
-
-
-
 </header>

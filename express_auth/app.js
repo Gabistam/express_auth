@@ -3,8 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const jwt = require('jsonwebtoken');
 const userRoutes = require('./routes/userRoutes');
 const { initDatabase } = require('./config/database');
+const { isLoggedIn } = require('./middlewares/auth');
 const path = require('path');
 const twig = require('twig');
 require('dotenv').config();
@@ -60,10 +62,23 @@ function ensureAuthenticated(req, res, next) {
 // Utilisation du middleware pour des routes spécifiques (si nécessaire)
 // app.use('/protected-route', ensureAuthenticated, ...);
 
+app.use((req, res, next) => {
+    const token = req.cookies.token;
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
+            if (!err && decodedUser) {
+                req.user = decodedUser;
+            }
+        });
+    }
+    next();
+});
+
+
 app.use('/', userRoutes);
 
 app.get('/', (req, res) => {
-    res.render('pages/home');
+    res.render('pages/home', { user: req.user });
 });
 
 // Middleware pour la gestion des erreurs

@@ -58,7 +58,4 @@ exports.logout = (req, res) => {
     res.redirect('/login');
 };
 
-
-
-
-// Ici, vous pourriez également ajouter des méthodes pour la réinitialisation du mot de passe, la vérification de l'e-mail, etc.
+// Autres méthodes liées à l'authentification peuvent être ajoutées ici

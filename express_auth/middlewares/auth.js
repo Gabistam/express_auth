@@ -1,29 +1,35 @@
-/////////////// middlewares/auth.js
-
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-module.exports = (req, res, next) => {
+function isLoggedIn(req, res, next) {
     const token = req.cookies.token;
+    if (!token) return res.redirect('/login');
 
-    if (!token) {
-        return res.redirect('/login'); // Return early
-    }
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
+        if (err) {
+            res.clearCookie('token');
+            return res.redirect('/login');
+        }
+        req.user = decodedUser;
+        next();
+    });
+}
 
-    try {
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = verified;
-    } catch (error) {
-        console.error(error);
-        res.clearCookie('token');
-        return res.redirect('/login'); // Return early
-    }
+function redirectIfLoggedIn(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) return next(); // Si l'utilisateur n'est pas connecté, continuez
 
-    if (!req.user) {
-        return res.redirect('/'); // Return early
-    }
-    
-    next();
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
+        if (!err && decodedUser) {
+            return res.redirect('/profile'); // Si l'utilisateur est connecté, redirigez-le vers le profil
+        }
+        next();
+    });
+}
+
+module.exports = {
+    isLoggedIn,
+    redirectIfLoggedIn
 };

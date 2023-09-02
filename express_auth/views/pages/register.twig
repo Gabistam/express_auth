@@ -2,24 +2,29 @@
 
 {% block title %}Inscription{% endblock %}
 
-<div class="wrapper">
+{% block body %}
+    <div class="wrapper">
     
-    <h1>Inscription</h1>
+        <h1>Inscription</h1>
 
-    {% block body %}
-        <h2>Inscription</h2>
-        
-        <form action="/register" method="post">
-            <label for="username">Nom d'utilisateur:</label>
-            <input type="text" name="username" required>
+       <form action="/register" method="post" class="container mt-5">
+
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur:</label>
+                <input type="text" name="username" class="form-control" id="username" required>
+            </div>
             
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
             
-            <label for="password">Mot de passe:</label>
-            <input type="password" name="password" required>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+            </div>
             
-            <button type="submit">S'inscrire</button>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
         </form>
-    {% endblock %}
-</div>
+    </div>
+{% endblock %}
